@@ -1,0 +1,17 @@
+**use ejs template to repeat users saved outfits**
+
+<%= %> for things added to html...
+<% %> for logic
+
+Folders:
+
+app.js
+  Views
+    userOutfits.ejs()
+  Views/partials
+    header.ejs
+    footer.ejs
+
+  Public
+    app.css
+  

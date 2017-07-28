@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <title>CheckandWear</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="/app.css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap-star-rating/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+    <script src="/bower_components/bootstrap-star-rating/js/star-rating.js" type="text/javascript"></script>
+
+    <style>
+        body        { padding-top:80px; }
+    </style>
+
+</head>
+<body>
+<a class ="btn btn-primary" href="/profile">Go To Profile</a></p>
+<a class ="btn btn-primary" href="/outfits?mine=true">View Just My Outfits</a></p>
+<a class ="btn btn-primary" href="/outfits">View Everyone's Outfits</a></p>
+
+
+<h2>Outfits</h2>
+<p>Add new outfit<p>
+<form action="/outfits" enctype="multipart/form-data" method="post">
+   Outfit Name: <input type="text" name = "name">
+   <br>
+   <br>
+   <label>First Piece of Clothing
+      <input type="file" name="file" id="file" />
+      <br>
+      Or paste a link
+      <input type="text" name="url"/>
+   </label>
+   <label>Second Piece of Clothing
+      <input type="file" name="file" id="file" />
+      <br>
+      Or paste a link
+      <input type="text" name="url"/>
+   </label>
+   <label>Third Piece of Clothing
+      <input type="file" name="file" id="file" />
+      <br>
+      Or paste a link
+      <input type="text" name="url"/>
+   </label>
+   <input class ="btn btn-primary" type="submit" value="Upload">
+
+</form>
+
+<div class="list-group">
+   <div class="list-group-item" ng-repeat="msg in msgs">
+      <% for(var i = 0; i < outfits.length; i++) {%>
+         <p>Outfit Name: <%= outfits[i].name %><p>
+         <p>Outfit Owner: <%= outfits[i].email %><p>
+         <label for="input-1" class="control-label">Rate This Outfit</label>
+         <input id="<%= outfits[i]._id %>" outfit = "<%= outfits[i]._id %>" value = "<%= ratings[outfits[i]._id] %>" email ="<%= email %>" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
+         <script>
+            $("#<%= outfits[i]._id %>").rating();
+            $("#<%= outfits[i]._id %>").rating({min:1, max:10, step:2, size:'lg'});
+            $('#<%= outfits[i]._id %>').on('rating.change', function(event, value, caption) {
+               $.ajax({
+                  url:'/ratings',
+                  type: 'PUT',
+                  headers: {'Content-type': 'application/json'},
+                  data: JSON.stringify({'email': $(this).attr('email'), 'score': value, 'outfitId': $(this).attr('outfit')}),
+                  success: function addCell() {
+                     location.reload(true);
+                  }
+               });
+            });
+         </script>
+         <label>Total Stars: <%= total[outfits[i]._id] %></label>
+         <% for(var j=0; j < outfits[i].files.length; j++) {%>
+            <img src="<%= outfits[i].files[j] %>" alt="Mountain View" class="clothing">
+         <% } %>
+         <%if (outfits[i].email === email) { %>
+
+            <a href="/delete/outfits?outfitId=<%= outfits[i]._id %>">Delete Outfit</a>
+
+         <% } %>
+      <% } %>
+   </div>
+</div>
+
+</body>
+</html>

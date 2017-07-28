@@ -1,0 +1,39 @@
+{
+  "name": "CheckAndWear",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "server.js",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "connect-flash": "",
+    "cookie-parser": "^1.4.3",
+    "dateformat": "",
+    "ejs": "",
+    "express": "^4.14.0",
+    "express-session": "^1.15.4",
+    "formidable": "",
+    "fs": "",
+    "mongodb": "^2.2.28",
+    "mongoose": "^4.11.4",
+    "morgan": "^1.8.2",
+    "multer": "",
+    "passport": "",
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
+    "path": "",
+    "randomstring": "^1.1.5",
+    "request": ""
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node main.js",
+    "start": "node main.js"
+  },
+  "author": [
+    "Ashley Newman",
+    "Andrew Kim",
+    "Joey Angeja"
+  ]
+}
