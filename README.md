@@ -18,4 +18,6 @@ run bower install
 App Should run on 8080
 
 
-Never got facebook login to work
+Was not able to get facebook to posts data on user profile :(
+
+-Nicholas Noriega
